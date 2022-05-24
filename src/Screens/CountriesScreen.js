@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Input, View, StyleSheet,Button } from 'react-native';
+import { View, StyleSheet,Button } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { StackActions, NavigationActions } from 'react-navigation';
 import SearchBar from '../Components/Common/SearchBar';
@@ -7,7 +7,7 @@ import CountryList from '../Components/CountryList';
 import {Colors} from '../Components/Common/Colors'
 import football from '../Api/football';
 
-const HomeScreen = ({navigation}) => {
+const CountriesScreen = ({navigation}) => {
 
     const searchApi = async () => {
         const response = football.get('/v3/players',{
@@ -28,10 +28,12 @@ const HomeScreen = ({navigation}) => {
                 placeholder='Search your country'
             /> */}
             <CountryList
+                nav = {navigation}
                 name="France"
                 url="https://media.api-sports.io/flags/fr.svg"
             />
              <CountryList
+                nav = {navigation}
                 name="Spain"
                 url="https://media.api-sports.io/flags/es.svg"
             />
@@ -51,5 +53,4 @@ const styles = StyleSheet.create({
     }
 });
 
-
-export default HomeScreen;
+export default CountriesScreen;
