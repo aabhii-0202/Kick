@@ -8,16 +8,7 @@ const Leagues = ({navigation}) => {
 
      return (
         <View>
-            <CountryList
-                nav = {navigation}
-                name="France"
-                url="https://media.api-sports.io/flags/fr.svg"
-            />
-             <CountryList
-                nav = {navigation}
-                name="Spain"
-                url="https://media.api-sports.io/flags/es.svg"
-            />
+            <Text>Leagues</Text>
         </View>
     );
 };

@@ -1,6 +1,5 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { Text,View, StyleSheet,Button,FlatList } from 'react-native';
-import { StackActions, NavigationActions } from 'react-navigation';
 import SearchBar from '../Components/Common/SearchBar';
 import CountryList from '../Components/CountryList';
 import {Colors} from '../Components/Common/Colors'
@@ -26,8 +25,9 @@ const CountriesScreen = ({navigation}) => {
                 renderItem={({item})=>{
                     return (
                         <CountryList
-                            nav = {navigation}
+                            onclick = {()=>navigation.navigate('Leagues',{code:item.code})}
                             item= {item}
+                            numColumns={2}
                         />
                     );
                 }}

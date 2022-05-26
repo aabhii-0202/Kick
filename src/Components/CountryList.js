@@ -2,21 +2,15 @@ import React from 'react';
 import { View,Text ,StyleSheet,TouchableOpacity } from 'react-native';
 import { SvgCssUri } from 'react-native-svg';
 import {Colors} from '../Components/Common/Colors';
-import Leagues from '../Screens/Leagues';
 
 
-const App = ({item,nav}) => {
+const App = ({item,onclick}) => {
 
-    const {code,flag,name}=item;
+    const {flag,name}=item;
      return (
-         
         <TouchableOpacity
             style={styles.touchable}
-            onPress={()=>{
-                // nav.navigate('Leagues');
-                console.log(name);
-
-            }}
+            onPress={onclick}
         >
             <View style={styles.image}>
             <SvgCssUri
