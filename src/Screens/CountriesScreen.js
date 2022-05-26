@@ -1,46 +1,38 @@
-import React from 'react';
-import { View, StyleSheet,Button } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import React,{useState} from 'react';
+import { Text,View, StyleSheet,Button,FlatList } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import SearchBar from '../Components/Common/SearchBar';
 import CountryList from '../Components/CountryList';
 import {Colors} from '../Components/Common/Colors'
-import football from '../Api/football';
+import countriesHook from '../api/countriesHook';
 
 const CountriesScreen = ({navigation}) => {
 
-    const searchApi = async () => {
-        const response = football.get('/v3/players',{
-          params: {
-            league: '61',
-            search: 'neymar'
-          }
-        });
-        
-        response.then(()=>{
-            console.log({response});
-        })
-      }
-
-     return (
+    const [apicall,results] = countriesHook();
+    console.log(results);
+    return (
         <View style={styles.view}>
             {/* <SearchBar
                 placeholder='Search your country'
             /> */}
-            <CountryList
-                nav = {navigation}
-                name="France"
-                url="https://media.api-sports.io/flags/fr.svg"
+            <Text>HEllo</Text>
+            <Button 
+            title='Refresh'
+            onPress={apicall}
             />
-             <CountryList
-                nav = {navigation}
-                name="Spain"
-                url="https://media.api-sports.io/flags/es.svg"
+            <FlatList
+                data={results}
+                keyExtractor={(results,index)=>results.code+index}
+                renderItem={({item})=>{
+                    return (
+                        <CountryList
+                            nav = {navigation}
+                            item= {item}
+                        />
+                    );
+                }}
             />
-            {/* <Button
-                title='press'
-                onPress={searchApi}
-            /> */}
+            <Text>HEllo</Text>
         </View>
     );
 };

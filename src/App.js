@@ -33,10 +33,12 @@ function HomeScreen(){
       <Tab.Navigator>
           <Tab.Screen 
           name="Countries" 
-          component={CountriesContinues} />
+          component={CountriesContinues} 
+          options={{headerShown: false}}/>
           <Tab.Screen 
           name="Fixtures" 
-          component={FixturesScreen} />
+          component={FixturesScreen} 
+          options={{headerShown: false}}/>
       </Tab.Navigator>
     </NavigationContainer>);
 }
@@ -55,7 +57,28 @@ function CountriesContinues(){
           component={Leagues}
           options={{headerShown: false}}
           />
+          <Stack.Screen
+          name="InsideLeagues"
+          component={InsideLeagues}
+          options={{headerShown: false}}
+          />
     </Stack.Navigator>);
+}
+
+function InsideLeagues(){
+  const Tab = createBottomTabNavigator();
+  return(<NavigationContainer independent={true}>
+      <Tab.Navigator>
+          <Tab.Screen 
+          name="Countries" 
+          component={CountriesContinues} 
+          options={{headerShown: false}}/>
+          <Tab.Screen 
+          name="Fixtures" 
+          component={FixturesScreen} 
+          options={{headerShown: false}}/>
+      </Tab.Navigator>
+    </NavigationContainer>);
 }
 
 
