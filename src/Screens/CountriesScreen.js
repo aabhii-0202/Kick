@@ -5,16 +5,14 @@ import CountryList from '../Components/CountryList';
 import {Colors} from '../Components/Common/Colors'
 import countriesHook from '../api/countriesHook';
 import Space from '../Components/Common/Space';
+import Loading from '../Components/Common/Loading';
 
 const CountriesScreen = ({navigation}) => {
 
     const [apicall,results] = countriesHook();
     const [term,setTerm] = useState('');
     const [countries,setCountries] = useState([]);
-
-    console.log('Results: '+results.length);
     
-
     useEffect(()=>{
         searchFilter('');
     },[results]);
@@ -33,7 +31,6 @@ const CountriesScreen = ({navigation}) => {
             });
             setCountries(filteredList);
         }
-        console.log('Countries: '+countries.length);
     }
 
     
@@ -48,10 +45,7 @@ const CountriesScreen = ({navigation}) => {
                     searchFilter(term);
                 }}
             />
-            {/* <Button 
-            title='Refresh'
-            onPress={apicall}
-            /> */}
+
             <FlatList
                 data={countries}
                 numColumns={2}

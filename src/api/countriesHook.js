@@ -9,7 +9,7 @@ export default() => {
     },[]);
 
     const apicall = async  ()=>{
-        const options = {
+        const options = await {
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/countries',
             headers: {

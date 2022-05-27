@@ -6,6 +6,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CountriesScreen from './Screens/CountriesScreen';
 import FixturesScreen from './Screens/FixturesScreen';
 import Leagues from './Screens/Leagues';
+import {Colors} from './Components/Common/Colors';
+import {View ,Text} from 'react-native';
+import TabNavButton from './Components/Common/TabNavButton';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -30,15 +33,41 @@ const App = () => {
 function HomeScreen(){
   const Tab = createBottomTabNavigator();
   return(<NavigationContainer independent={true}>
-      <Tab.Navigator>
+      <Tab.Navigator
+        screenOptions  ={{
+          tabBarShowLabel:false,
+          tabBarStyle:{
+            height:50,
+            backgroundColor:Colors.tabnavBG,
+            paddingBottom:2,
+            paddingTop:2
+          }
+        }}
+        >
           <Tab.Screen 
           name="Countries" 
           component={CountriesContinues} 
-          options={{headerShown: false}}/>
+          options={{
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabNavButton
+                focused={focused}
+                name='Countries'
+                />
+            )
+          }}/>
           <Tab.Screen 
           name="Fixtures" 
           component={FixturesScreen} 
-          options={{headerShown: false}}/>
+          options={{
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabNavButton
+                focused={focused}
+                name='Leagues'
+                />
+            )
+            }}/>
       </Tab.Navigator>
     </NavigationContainer>);
 }
