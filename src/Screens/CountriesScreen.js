@@ -4,8 +4,6 @@ import SearchBar from '../Components/Common/SearchBar';
 import CountryList from '../Components/CountryList';
 import {Colors} from '../Components/Common/Colors'
 import countriesHook from '../api/countriesHook';
-import Space from '../Components/Common/Space';
-import Loading from '../Components/Common/Loading';
 
 const CountriesScreen = ({navigation}) => {
 
@@ -36,7 +34,6 @@ const CountriesScreen = ({navigation}) => {
     
     return (
         <SafeAreaView style={styles.view}>
-            <Space/>
             <SearchBar
                 placeholder='Search your country'
                 term={term}
@@ -59,7 +56,6 @@ const CountriesScreen = ({navigation}) => {
                     );
                 }}
             />
-            <Space/>
         </SafeAreaView>
     );
 };
@@ -69,6 +65,7 @@ const CountriesScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     view:{
         backgroundColor: Colors.mybackground,
+        paddingTop:30
     }
 });
 

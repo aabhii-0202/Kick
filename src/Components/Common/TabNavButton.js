@@ -12,7 +12,7 @@ const TabNavButton = ({focused,name}) => {
             height: '90%',
             backgroundColor:focused?Colors.tabnavFocused:Colors.mybackground,
             borderRadius:8,
-            marginStart:8
+            marginHorizontal:8
             }}>
             <Text style={{
               flex:1,

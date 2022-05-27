@@ -40,7 +40,11 @@ function HomeScreen(){
             height:50,
             backgroundColor:Colors.tabnavBG,
             paddingBottom:2,
-            paddingTop:2
+            paddingTop:2,
+            borderRadius:8,
+            marginLeft:8,
+            marginRight:8,
+            marginBottom:8
           }
         }}
         >
