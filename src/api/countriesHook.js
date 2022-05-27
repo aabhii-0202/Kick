@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 
 export default() => {
-
     const [results,setlist] = useState([]);
     
     useEffect(()=>{
@@ -20,8 +19,8 @@ export default() => {
           };
           axios.request(options).then(function (response) {
             setlist(response.data.response);
-            // console.log(response.data);
-            // console.log(results);
+            console.log('at countriesHook.js lin no 23 length of results:');
+            console.log(results.length);
         }).catch(function (error) {
             console.error(error);
         });

@@ -4,7 +4,7 @@ import { SvgCssUri } from 'react-native-svg';
 import {Colors} from '../Components/Common/Colors';
 
 
-const App = ({item,onclick}) => {
+const CountryList = ({item,onclick}) => {
 
     const {flag,name}=item;
      return (
@@ -57,4 +57,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default App;
+export default CountryList;
