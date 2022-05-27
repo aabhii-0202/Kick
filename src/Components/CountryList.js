@@ -30,7 +30,7 @@ const CountryList = ({item,onclick}) => {
 
 const styles = StyleSheet.create({
     flag:{
-        
+        backgroundColor:Colors.black
     },
     text:{
         color: 'black',
@@ -41,15 +41,17 @@ const styles = StyleSheet.create({
         
     },
     image:{
-        backgroundColor:'white',
+        backgroundColor:Colors.black,
         flex:4,
-        backgroundColor: Colors.mybackground,
-
+        backgroundColor: Colors.black,
+        borderWidth:3,
+        borderColor:Colors.black,
+        borderRadius:4,
 
     },touchable:{
         width:'40%',
         height:150,
-        marginHorizontal:16,
+        marginHorizontal:20,
         marginVertical: 8,
         padding:4,
         backgroundColor: Colors.mybackground
