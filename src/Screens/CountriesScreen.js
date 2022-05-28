@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import { Text,View, StyleSheet,Button,FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet,FlatList, SafeAreaView } from 'react-native';
 import SearchBar from '../Components/Common/SearchBar';
 import CountryList from '../Components/CountryList';
 import {Colors} from '../Components/Common/Colors'

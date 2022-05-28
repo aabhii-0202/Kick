@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { View,Text,StyleSheet, FlatList } from 'react-native';
+import { View,StyleSheet, FlatList } from 'react-native';
 import axios from 'axios';
 import LeaguesList from '../Components/LeaguesList';
 
@@ -33,8 +33,6 @@ const Leagues = ({route,navigation}) => {
     }
     return (
         <View>
-            <Text>Leagues</Text>
-            
             <FlatList
                 data={leagues}
                 keyExtractor={(leagues,index)=>leagues.id+index}
@@ -42,7 +40,9 @@ const Leagues = ({route,navigation}) => {
                 renderItem={({item})=>{
                     return (
                         <LeaguesList
-                            onclick = {()=>console.log(leagues.id)}
+                            onclick = {()=>navigation.navigate('InsideLeagues',{
+                                id:item.league.id
+                            })}
                             logo = {item.league.logo}
                             name = {item.league.name}
                         />

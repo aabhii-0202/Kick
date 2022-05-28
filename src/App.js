@@ -9,6 +9,10 @@ import Leagues from './Screens/Leagues';
 import {Colors} from './Components/Common/Colors';
 import {View ,Text} from 'react-native';
 import TabNavButton from './Components/Common/TabNavButton';
+import PlayerSearch from './Screens/PlayerSearch';
+import TeamSearch from './Screens/TeamSearch';
+import LeagueFixtures from './Screens/LeagueFixtures';
+import TeamInfo from './Screens/TeamInfo';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -25,14 +29,31 @@ const App = () => {
             component={HomeScreen}
             options={{headerShown: false}}
             />
+            <Stack.Screen
+            name="Leagues"
+            component={Leagues}
+            options={{headerShown: false
+            }}
+            />
+            <Stack.Screen
+            name="InsideLeagues"
+            component={InsideLeagues}
+            options={{headerShown: false}}
+            />
+            <Stack.Screen
+            name="TeamInfo"
+            component={TeamInfo}
+            options={{headerShown: false}}
+            />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
+
 function HomeScreen(){
   const Tab = createBottomTabNavigator();
-  return(<NavigationContainer independent={true}>
+  return(
       <Tab.Navigator
         screenOptions  ={{
           tabBarShowLabel:false,
@@ -50,7 +71,7 @@ function HomeScreen(){
         >
           <Tab.Screen 
           name="Countries" 
-          component={CountriesContinues} 
+          component={CountriesScreen} 
           options={{
             headerShown: false,
             tabBarIcon:({focused})=>(
@@ -68,50 +89,73 @@ function HomeScreen(){
             tabBarIcon:({focused})=>(
               <TabNavButton
                 focused={focused}
+                name='Fixtures'
+                />
+            )
+            }}/>
+      </Tab.Navigator>
+  );
+}
+
+
+
+function InsideLeagues({route}){
+  const Tab = createBottomTabNavigator();
+  const {id} = route.params;
+  console.log(id);
+  return(
+      <Tab.Navigator
+      screenOptions  ={{
+        tabBarShowLabel:false,
+        tabBarStyle:{
+          height:50,
+          backgroundColor:Colors.tabnavBG,
+          paddingBottom:2,
+          paddingTop:2,
+          borderRadius:8,
+          marginLeft:8,
+          marginRight:8,
+          marginBottom:8
+        }}}>
+          <Tab.Screen 
+          name="TeamSearch" 
+          component={TeamSearch} 
+          initialParams={{id:id}}
+          options={{
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabNavButton
+                focused={focused}
+                name='Team'
+                />
+            )
+            }}/>
+          <Tab.Screen 
+          name="PlayerSearch" 
+          component={PlayerSearch} 
+          options={{
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabNavButton
+                focused={focused}
+                name='Player'
+                />
+            )
+            }}/>
+          <Tab.Screen 
+          name="LeagueFixtures" 
+          component={LeagueFixtures} 
+          options={{
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabNavButton
+                focused={focused}
                 name='Leagues'
                 />
             )
             }}/>
       </Tab.Navigator>
-    </NavigationContainer>);
-}
-
-function CountriesContinues(){
-  const Stack = createNativeStackNavigator();
-  return(
-      <Stack.Navigator>
-          <Stack.Screen
-          name="CountriesScreen"
-          component={CountriesScreen}
-          options={{headerShown: false}}
-          />
-          <Stack.Screen
-          name="Leagues"
-          component={Leagues}
-          options={{headerShown: false}}
-          />
-          <Stack.Screen
-          name="InsideLeagues"
-          component={InsideLeagues}
-          options={{headerShown: false}}
-          />
-    </Stack.Navigator>);
-}
-
-function InsideLeagues(){
-  const Tab = createBottomTabNavigator();
-  return(<NavigationContainer independent={true}>
-      <Tab.Navigator>
-          <Tab.Screen 
-          name="Countries" 
-          component={CountriesContinues} 
-          options={{headerShown: false}}/>
-          <Tab.Screen 
-          name="Fixtures" 
-          component={FixturesScreen} 
-          options={{headerShown: false}}/>
-      </Tab.Navigator>
-    </NavigationContainer>);
+      );
 }
 
 
