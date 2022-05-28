@@ -1,5 +1,8 @@
 export const Colors = {
-    white: '#fff',
+    white: '#FFFFFF',
     mybackground: '#EEEEEE',
-    // your colors
+    black: '#000000',
+    tabnavBG: '#61EBFA',
+    tabnavFocused: '#2C75FF',
+    tabnavNotFocused: '#EEEEEE'
   }

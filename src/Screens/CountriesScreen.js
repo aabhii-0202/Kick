@@ -1,6 +1,5 @@
-import React,{useState} from 'react';
-import { Text,View, StyleSheet,Button,FlatList } from 'react-native';
-import { StackActions, NavigationActions } from 'react-navigation';
+import React, {useState,useEffect} from 'react';
+import { StyleSheet,FlatList, SafeAreaView } from 'react-native';
 import SearchBar from '../Components/Common/SearchBar';
 import CountryList from '../Components/CountryList';
 import {Colors} from '../Components/Common/Colors'
@@ -9,31 +8,55 @@ import countriesHook from '../api/countriesHook';
 const CountriesScreen = ({navigation}) => {
 
     const [apicall,results] = countriesHook();
-    console.log(results);
+    const [term,setTerm] = useState('');
+    const [countries,setCountries] = useState([]);
+    
+    useEffect(()=>{
+        searchFilter('');
+    },[results]);
+
+    const searchFilter = (e)=>{
+        console.log('Search: '+e);
+        if(e===''||e.length==0){
+            setCountries(results);
+        }else if(!e){
+            setCountries(results);
+        }else{
+            const text = e.toLowerCase();
+            const data = results;
+            const filteredList = data.filter((item)=>{
+                return item.name.toLowerCase().search(text) > -1 ;
+            });
+            setCountries(filteredList);
+        }
+    }
+
+    
     return (
-        <View style={styles.view}>
-            {/* <SearchBar
+        <SafeAreaView style={styles.view}>
+            <SearchBar
                 placeholder='Search your country'
-            /> */}
-            <Text>HEllo</Text>
-            <Button 
-            title='Refresh'
-            onPress={apicall}
+                term={term}
+                onTermChanged={(newTerm) => {
+                    setTerm(newTerm);
+                    searchFilter(term);
+                }}
             />
+
             <FlatList
-                data={results}
-                keyExtractor={(results,index)=>results.code+index}
+                data={countries}
+                numColumns={2}
+                keyExtractor={(countries,index)=>countries.code+index}
                 renderItem={({item})=>{
                     return (
                         <CountryList
-                            nav = {navigation}
-                            item= {item}
+                            onclick = {()=>navigation.navigate('Leagues',{code:item.code})}
+                            item = {item}
                         />
                     );
                 }}
             />
-            <Text>HEllo</Text>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -42,6 +65,7 @@ const CountriesScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     view:{
         backgroundColor: Colors.mybackground,
+        paddingTop:30
     }
 });
 

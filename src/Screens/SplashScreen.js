@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text }from 'react-native';
+import {View}from 'react-native';
 import Button from '../Components/Common/Button';
 import { CommonActions } from '@react-navigation/native';
 import CardSection from '../Components/Common/CardSection';

@@ -2,21 +2,15 @@ import React from 'react';
 import { View,Text ,StyleSheet,TouchableOpacity } from 'react-native';
 import { SvgCssUri } from 'react-native-svg';
 import {Colors} from '../Components/Common/Colors';
-import Leagues from '../Screens/Leagues';
 
 
-const App = ({item,nav}) => {
+const CountryList = ({item,onclick}) => {
 
-    const {code,flag,name}=item;
+    const {flag,name}=item;
      return (
-         
         <TouchableOpacity
             style={styles.touchable}
-            onPress={()=>{
-                // nav.navigate('Leagues');
-                console.log(name);
-
-            }}
+            onPress={onclick}
         >
             <View style={styles.image}>
             <SvgCssUri
@@ -36,7 +30,7 @@ const App = ({item,nav}) => {
 
 const styles = StyleSheet.create({
     flag:{
-        
+        backgroundColor:Colors.black
     },
     text:{
         color: 'black',
@@ -47,15 +41,17 @@ const styles = StyleSheet.create({
         
     },
     image:{
-        backgroundColor:'white',
+        backgroundColor:Colors.black,
         flex:4,
-        backgroundColor: Colors.mybackground,
-
+        backgroundColor: Colors.black,
+        borderWidth:3,
+        borderColor:Colors.black,
+        borderRadius:4,
 
     },touchable:{
         width:'40%',
         height:150,
-        marginHorizontal:16,
+        marginHorizontal:20,
         marginVertical: 8,
         padding:4,
         backgroundColor: Colors.mybackground
@@ -63,4 +59,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default App;
+export default CountryList;
