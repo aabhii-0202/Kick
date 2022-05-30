@@ -4,7 +4,6 @@ import { Colors } from './Common/Colors';
 import TeamWithName from './TeamWithName';
 
 const FixtureComp = ({  
-                        navigation,
                         onclick,
                         logohome,
                         logoaway,
