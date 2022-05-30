@@ -43,9 +43,6 @@ var Live = 'Live';
                 </View>
                     <Text style={styles.baseline}>{leaguename} on {matchdatetime}</Text>
                 </View>
-            
-            
-            
         </TouchableOpacity>
     );
 };

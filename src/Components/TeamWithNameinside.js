@@ -3,11 +3,12 @@ import {View, Text,StyleSheet,Image,TouchableOpacity } from 'react-native';
 import { Colors } from '../Components/Common/Colors';
 
 
-const TeamWithName = ({logo,name}) => {
+const TeamWithNameinside = ({logo,name,click}) => {
 
 
      return (
-        <View
+        <TouchableOpacity
+            onPress={click}
             style={styles.touchable}
         >
             <View style={styles.image}>
@@ -20,7 +21,7 @@ const TeamWithName = ({logo,name}) => {
                 {name}
             </Text>
             
-        </View>
+        </TouchableOpacity>
     );
 };
 
@@ -54,4 +55,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default TeamWithName;
+export default TeamWithNameinside;
