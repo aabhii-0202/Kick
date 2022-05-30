@@ -13,6 +13,7 @@ import PlayerSearch from './Screens/PlayerSearch';
 import TeamSearch from './Screens/TeamSearch';
 import LeagueFixtures from './Screens/LeagueFixtures';
 import TeamInfo from './Screens/TeamInfo';
+import FixtureDetails from './Screens/FixtureDetails';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -43,6 +44,11 @@ const App = () => {
             <Stack.Screen
             name="TeamInfo"
             component={TeamInfo}
+            options={{headerShown: false}}
+            />
+            <Stack.Screen
+            name="FixtureDetails"
+            component={FixtureDetails}
             options={{headerShown: false}}
             />
       </Stack.Navigator>
