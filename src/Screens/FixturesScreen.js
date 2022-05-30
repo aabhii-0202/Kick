@@ -88,7 +88,7 @@ const FixturesScreen = ({navigation}) => {
         renderItem={({item})=>{
             return (
                 <FixtureComp
-                    onclick={()=>{console.log('Fixture clicked')}}
+                    onclick={()=>navigation.navigate('FixtureDetails',{id:item.fixture.id})}
                     logohome={item.teams.home.logo}
                     logoaway={item.teams.away.logo}
                     homename={item.teams.home.name}
@@ -101,19 +101,44 @@ const FixturesScreen = ({navigation}) => {
             );
         }}
     /> :
-    <Text style={styles.message}>No Fixtures For Today. You Can Search For Some Other Date</Text>
+    <Text style={{
+        color: Colors.black,
+        alignSelf: 'center',
+        fontSize:18,
+        
+    }}>No Fixtures For Today. You Can Search For Some Other Date</Text>
     } 
     
     return (
         <View>
-            <Text>Fixture Screen</Text>
             <TouchableOpacity
                 onPress={()=>setOpen(true)}
             >
+            <View style={{
+                marginVertical:16,
+                marginHorizontal:40,
+                flexDirection: 'row',
+                backgroundColor:Colors.white,
+                paddingVertical:8,
+                borderRadius:8,
+                }}>
             <Image
-                style={{height:20,width:20}}
+                style={{
+                    height:30,
+                    width:30,
+                    marginHorizontal:56,
+                }}
                 source={require('../../Assets/images/calander.png')}
             />
+            <Text
+                style={{
+                    color: Colors.black,
+                    fontWeight: 'bold',
+                    alignSelf: 'center',
+                    fontSize:18
+                }}
+            >Search By Date</Text>
+            </View>
             </TouchableOpacity>
             
         
@@ -135,20 +160,6 @@ const FixturesScreen = ({navigation}) => {
         </View>
     );
 };
-
-
-const styles = StyleSheet.create({
-    message:{
-        fontSize:19,
-        color:Colors.black,
-        marginHorizontal:16,
-        alignSelf:'center',
-        marginTop:100,
-        textAlign: 'center'
-
-    }
-
-});
 
 
 export default FixturesScreen;

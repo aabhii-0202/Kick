@@ -15,6 +15,7 @@ const FixtureComp = ({
                         matchdatetime,    
                     }) => {
 
+var Live = 'Live';
 
      return (
         <TouchableOpacity
@@ -31,7 +32,7 @@ const FixtureComp = ({
                         {homescore} - {awayscore}
                     </Text>
                     <Text style={styles.text}>
-                        Live
+                        {Live}
                     </Text>
 
                     </View>
