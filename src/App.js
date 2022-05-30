@@ -51,6 +51,11 @@ const App = () => {
             component={FixtureDetails}
             options={{headerShown: false}}
             />
+            <Stack.Screen
+            name="TeamInfo2"
+            component={TeamInfo}
+            options={{headerShown: false}}
+            />
       </Stack.Navigator>
     </NavigationContainer>
   );
