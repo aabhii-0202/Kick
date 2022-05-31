@@ -73,7 +73,6 @@ const FixturesScreen = ({navigation}) => {
           
           axios.request(options).then(function (response) {
             setFixtures(response.data.response);
-            console.log(response.data.response);
             console.log("No of Fixtures: "+fixtures.length);
           }).catch(function (error) {
               console.error(error);

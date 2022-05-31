@@ -5,6 +5,9 @@ import {Colors} from '../Components/Common/Colors';
 import TeamvsTeam from '../Components/TeamvsTeam';
 import Heading from '../Components/Common/Heading';
 import EventItem from '../Components/EventItem';
+import TeamLineup from '../Components/TeamLineup';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
 
 const FixtureDetails = ({route,navigation}) => {
 
@@ -81,15 +84,59 @@ const FixtureDetails = ({route,navigation}) => {
                 }}
             />
             <Heading text="Lineups" /> 
+            {Lineup()}
+            {/* <TeamLineup 
+                index={0}
+                lineup={fixturedetail.lineups}
+            /> */}
+
+
         </ScrollView>
         :
         <Text>Loading</Text>
         
     }
 
+    const Lineup = () =>{
+        const Tab = createMaterialTopTabNavigator();
+        return (
+            <Tab.Navigator
+                screenOptions  ={{
+                tabBarStyle:{
+                  backgroundColor:Colors.white,
+                  borderRadius:8,
+                  margin:16
+                },
+                tabBarLabelStyle: { 
+                    fontSize: 12,
+                    color:Colors.black,
+                    fontWeight:'bold',
+                },
+              }}
+            >
+              <Tab.Screen 
+                name={fixturedetail.teams.home.name}
+                component={TeamLineup} 
+                initialParams={{
+                    index: 0,
+                    lineup:fixturedetail.lineups
+                }}
+                />
+              <Tab.Screen 
+                name={fixturedetail.teams.away.name}
+                component={TeamLineup} 
+                initialParams={{
+                    index:1,
+                    lineup:fixturedetail.lineups
+                }}
+                />
+            </Tab.Navigator>
+          );
+    }
+
      return (
         <View>
-            {renderPage()}
+            {renderPage()}  
         </View>
     );
 };
