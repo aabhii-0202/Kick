@@ -105,6 +105,9 @@ const FixturesScreen = ({navigation}) => {
         color: Colors.black,
         alignSelf: 'center',
         fontSize:18,
+        marginHorizontal:16,
+        textAlign:'center',
+        marginTop:200
         
     }}>No Fixtures For Today. You Can Search For Some Other Date</Text>
     } 
