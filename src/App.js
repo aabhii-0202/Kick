@@ -7,7 +7,6 @@ import CountriesScreen from './Screens/CountriesScreen';
 import FixturesScreen from './Screens/FixturesScreen';
 import Leagues from './Screens/Leagues';
 import {Colors} from './Components/Common/Colors';
-import {View ,Text} from 'react-native';
 import TabNavButton from './Components/Common/TabNavButton';
 import PlayerSearch from './Screens/PlayerSearch';
 import TeamSearch from './Screens/TeamSearch';
@@ -61,7 +60,6 @@ const App = () => {
   );
 };
 
-
 function HomeScreen(){
   const Tab = createBottomTabNavigator();
   return(
@@ -108,12 +106,9 @@ function HomeScreen(){
   );
 }
 
-
-
 function InsideLeagues({route}){
   const Tab = createBottomTabNavigator();
   const {id} = route.params;
-  console.log(id);
   return(
       <Tab.Navigator
       screenOptions  ={{
@@ -150,7 +145,7 @@ function InsideLeagues({route}){
               <TabNavButton
                 focused={focused}
                 name='Player'
-                />
+              />
             )
             }}/>
           <Tab.Screen 
@@ -162,13 +157,11 @@ function InsideLeagues({route}){
               <TabNavButton
                 focused={focused}
                 name='Leagues'
-                />
+              />
             )
             }}/>
       </Tab.Navigator>
       );
 }
-
-
 
 export default App;

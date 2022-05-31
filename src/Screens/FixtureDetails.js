@@ -1,8 +1,12 @@
 import React,{useState,useEffect} from 'react';
-import {View, Text,StyleSheet,Image } from 'react-native';
+import {View, Text,StyleSheet,Image,ScrollView,FlatList } from 'react-native';
 import axios from 'axios';
 import {Colors} from '../Components/Common/Colors';
 import TeamvsTeam from '../Components/TeamvsTeam';
+import Heading from '../Components/Common/Heading';
+import EventItem from '../Components/EventItem';
+import TeamLineup from '../Components/TeamLineup';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 
 const FixtureDetails = ({route,navigation}) => {
@@ -16,6 +20,7 @@ const FixtureDetails = ({route,navigation}) => {
     },[]);
 
     const getfixturedetails = (id) => {
+        console.log('Id -> '+id)
         const options = {
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
@@ -28,7 +33,7 @@ const FixtureDetails = ({route,navigation}) => {
           
           axios.request(options).then(function (response) {
             setfixture(response.data.response[0]);
-            console.log(fixturedetail)
+            console.log('fixturedetail  '+fixturedetail);
           }).catch(function (error) {
               console.error(error);
           });
@@ -36,7 +41,7 @@ const FixtureDetails = ({route,navigation}) => {
 
     const renderPage = () => {
         return fixturedetail ?
-        <View style={styles.parentview}>
+        <ScrollView style={styles.parentview}>
             <View 
                 style={styles.leaguelogocontainer}
             >
@@ -52,26 +57,86 @@ const FixtureDetails = ({route,navigation}) => {
                     logoaway={fixturedetail.teams.away.logo}
                     homename={fixturedetail.teams.home.name}
                     awayname={fixturedetail.teams.away.name}
-                    homescore={4}
-                    awayscore={2}
+                    homescore={fixturedetail.goals.home}
+                    awayscore={fixturedetail.goals.away}
                     homeid={fixturedetail.teams.home.id}
                     awayid={fixturedetail.teams.away.id}
                 />
             </View>
+            <Heading text="Events" /> 
+            <FlatList
+                data={fixturedetail.events}
+                horizontal={true}
+                renderItem={({item})=>{
+                    return (
+                        <EventItem
+                            url = {item.team.logo}
+                            name = {item.team.name}
+                            timeelapsed = {item.time.elapsed}
+                            extratime = {item.time.extra}
+                            playername = {item.player.name}
+                            asistname = {item.assist.name}
+                            type = {item.type}
+                            detail = {item.detail}
+                    />
+
+                    );
+                }}
+            />
+            <Heading text="Lineups" /> 
+            {Lineup()}
+            {/* <TeamLineup 
+                index={0}
+                lineup={fixturedetail.lineups}
+            /> */}
 
 
-
-
-        </View>
+        </ScrollView>
         :
         <Text>Loading</Text>
         
     }
 
+    const Lineup = () =>{
+        const Tab = createMaterialTopTabNavigator();
+        return (
+            <Tab.Navigator
+                screenOptions  ={{
+                tabBarStyle:{
+                  backgroundColor:Colors.white,
+                  borderRadius:8,
+                  margin:16
+                },
+                tabBarLabelStyle: { 
+                    fontSize: 12,
+                    color:Colors.black,
+                    fontWeight:'bold',
+                },
+              }}
+            >
+              <Tab.Screen 
+                name={fixturedetail.teams.home.name}
+                component={TeamLineup} 
+                initialParams={{
+                    index: 0,
+                    lineup:fixturedetail.lineups
+                }}
+                />
+              <Tab.Screen 
+                name={fixturedetail.teams.away.name}
+                component={TeamLineup} 
+                initialParams={{
+                    index:1,
+                    lineup:fixturedetail.lineups
+                }}
+                />
+            </Tab.Navigator>
+          );
+    }
+
      return (
         <View>
-            <Text>FixtureDetails</Text>
-            {renderPage()}
+            {renderPage()}  
         </View>
     );
 };
@@ -90,8 +155,12 @@ const styles = StyleSheet.create({
     },
     leaguelogo:{
         height:'100%',
-        width:100,
-        alignSelf: 'center'
+        width:'auto',
+        minWidth:175,
+        alignSelf: 'center',
+        flexGrow:2,
+        alignItems: 'stretch',
+        flexDirection:'row'
     },
 
 });

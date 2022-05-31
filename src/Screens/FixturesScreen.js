@@ -73,7 +73,6 @@ const FixturesScreen = ({navigation}) => {
           
           axios.request(options).then(function (response) {
             setFixtures(response.data.response);
-            console.log(response.data.response);
             console.log("No of Fixtures: "+fixtures.length);
           }).catch(function (error) {
               console.error(error);
@@ -105,6 +104,9 @@ const FixturesScreen = ({navigation}) => {
         color: Colors.black,
         alignSelf: 'center',
         fontSize:18,
+        marginHorizontal:16,
+        textAlign:'center',
+        marginTop:200
         
     }}>No Fixtures For Today. You Can Search For Some Other Date</Text>
     } 

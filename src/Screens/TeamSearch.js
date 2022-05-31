@@ -14,7 +14,7 @@ const TeamSearch = ({navigation,route}) => {
 
     const apicall = () =>{
 
-        const {id} = route.params
+        const {id} = route.params;
         const options = {
         method: 'GET',
         url: 'https://api-football-v1.p.rapidapi.com/v2/teams/league/'+id,
@@ -38,7 +38,6 @@ const TeamSearch = ({navigation,route}) => {
                 keyExtractor={(teams,index)=>teams.team_id+index}
                 numColumns={3}
                 renderItem={({item})=>{
-                    console.log(item.name);
                     return (
                         <LeaguesList
                             onclick = {()=>navigation.navigate('TeamInfo',{
