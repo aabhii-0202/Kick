@@ -35,8 +35,7 @@ const PlayerInfo = ({route,navigation}) => {
           });
     }
 
-    // console.log('lllll'+playerinfo);
-     return (
+    return (
          
         <ScrollView style={styles.container}>
             <Text>{id}</Text>

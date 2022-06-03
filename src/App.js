@@ -108,6 +108,19 @@ function HomeScreen(){
                 />
             )
             }}/>
+            <Tab.Screen 
+          name="TeamSearch" 
+          component={TeamSearch} 
+          initialParams={{id:id}}
+          options={{
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabNavButton
+                focused={focused}
+                name='Team'
+                />
+            )
+            }}/>
       </Tab.Navigator>
   );
 }
@@ -143,19 +156,6 @@ function InsideLeagues({route}){
             )
             }}/>
 
-          <Tab.Screen 
-          name="TeamSearch" 
-          component={TeamSearch} 
-          initialParams={{id:id}}
-          options={{
-            headerShown: false,
-            tabBarIcon:({focused})=>(
-              <TabNavButton
-                focused={focused}
-                name='Team'
-                />
-            )
-            }}/>
           <Tab.Screen 
           name="PlayerSearch" 
           component={PlayerSearch} 
