@@ -13,6 +13,7 @@ import TeamSearch from './Screens/TeamSearch';
 import LeagueFixtures from './Screens/LeagueFixtures';
 import TeamInfo from './Screens/TeamInfo';
 import FixtureDetails from './Screens/FixtureDetails';
+import PlayerInfo from './Screens/PlayerInfo';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -53,6 +54,11 @@ const App = () => {
             <Stack.Screen
             name="TeamInfo2"
             component={TeamInfo}
+            options={{headerShown: false}}
+            />
+            <Stack.Screen
+            name="PlayerInfo"
+            component={PlayerInfo}
             options={{headerShown: false}}
             />
       </Stack.Navigator>
@@ -124,6 +130,20 @@ function InsideLeagues({route}){
           marginBottom:8
         }}}>
           <Tab.Screen 
+          name="LeagueFixtures" 
+          component={LeagueFixtures} 
+          initialParams={{id:id}}
+          options={{
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabNavButton
+                focused={focused}
+                name='Fixtures'
+              />
+            )
+            }}/>
+
+          <Tab.Screen 
           name="TeamSearch" 
           component={TeamSearch} 
           initialParams={{id:id}}
@@ -139,6 +159,7 @@ function InsideLeagues({route}){
           <Tab.Screen 
           name="PlayerSearch" 
           component={PlayerSearch} 
+          initialParams={{id:id}}
           options={{
             headerShown: false,
             tabBarIcon:({focused})=>(
@@ -148,18 +169,7 @@ function InsideLeagues({route}){
               />
             )
             }}/>
-          <Tab.Screen 
-          name="LeagueFixtures" 
-          component={LeagueFixtures} 
-          options={{
-            headerShown: false,
-            tabBarIcon:({focused})=>(
-              <TabNavButton
-                focused={focused}
-                name='Leagues'
-              />
-            )
-            }}/>
+          
       </Tab.Navigator>
       );
 }
