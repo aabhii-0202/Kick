@@ -6,13 +6,16 @@ import TeamvsTeam from '../Components/TeamvsTeam';
 import Heading from '../Components/Common/Heading';
 import EventItem from '../Components/EventItem';
 import TeamLineup from '../Components/TeamLineup';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import NewButton from '../Components/Common/NewButton';
 
 
 const FixtureDetails = ({route,navigation}) => {
 
 
     const [fixturedetail,setfixture] = useState();
+    const [foucsed1,setfocused1] = useState(false);
+    const [foucsed0,setfocused0] = useState(true);
+    const [index,setindex] = useState(0);
     
     const {id} = route.params;
     useEffect(()=>{
@@ -20,7 +23,6 @@ const FixtureDetails = ({route,navigation}) => {
     },[]);
 
     const getfixturedetails = (id) => {
-        console.log('Id -> '+id)
         const options = {
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
@@ -33,10 +35,44 @@ const FixtureDetails = ({route,navigation}) => {
           
           axios.request(options).then(function (response) {
             setfixture(response.data.response[0]);
-            console.log('fixturedetail  '+fixturedetail);
           }).catch(function (error) {
               console.error(error);
           });
+    }
+
+    const showdetails = () => {
+        return fixturedetail.lineups.length>0 
+            ?(
+            <View>
+            <Heading text="Lineups" /> 
+            <View style={styles.tabview}>
+                <NewButton
+                    onPressed={()=>{
+                        setfocused1(false);
+                        setfocused0(true);
+                        setindex(0);
+                    }}
+                    text={fixturedetail.teams.home.name}
+                    focused={foucsed0}
+                    />
+                <NewButton
+                    onPressed={()=>{
+                        setfocused1(true);
+                        setfocused0(false);
+                        setindex(1);
+                    }}
+                    text={fixturedetail.teams.away.name}
+                    focused={foucsed1}
+                    />
+                
+            </View>
+            <TeamLineup 
+                index={index}
+                lineup={fixturedetail.lineups}
+            />
+            </View>)
+            :
+            <Text style={styles.datanotprovided}>Lineup data is not available for now.</Text>
     }
 
     const renderPage = () => {
@@ -83,12 +119,7 @@ const FixtureDetails = ({route,navigation}) => {
                     );
                 }}
             />
-            <Heading text="Lineups" /> 
-            {Lineup()}
-            {/* <TeamLineup 
-                index={0}
-                lineup={fixturedetail.lineups}
-            /> */}
+            {showdetails()}
 
 
         </ScrollView>
@@ -97,42 +128,7 @@ const FixtureDetails = ({route,navigation}) => {
         
     }
 
-    const Lineup = () =>{
-        const Tab = createMaterialTopTabNavigator();
-        return (
-            <Tab.Navigator
-                screenOptions  ={{
-                tabBarStyle:{
-                  backgroundColor:Colors.white,
-                  borderRadius:8,
-                  margin:16
-                },
-                tabBarLabelStyle: { 
-                    fontSize: 12,
-                    color:Colors.black,
-                    fontWeight:'bold',
-                },
-              }}
-            >
-              <Tab.Screen 
-                name={fixturedetail.teams.home.name}
-                component={TeamLineup} 
-                initialParams={{
-                    index: 0,
-                    lineup:fixturedetail.lineups
-                }}
-                />
-              <Tab.Screen 
-                name={fixturedetail.teams.away.name}
-                component={TeamLineup} 
-                initialParams={{
-                    index:1,
-                    lineup:fixturedetail.lineups
-                }}
-                />
-            </Tab.Navigator>
-          );
-    }
+    
 
      return (
         <View>
@@ -162,6 +158,19 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         flexDirection:'row'
     },
+    tabview:{
+        flexDirection:'row',
+        marginHorizontal:16,
+        marginVertical:8,
+        borderRadius:8,
+        borderWidth:1,
+    },
+    datanotprovided:{
+        fontSize:16,
+        color:Colors.black,
+        alignSelf:'center',
+        marginBottom:20
+    }
 
 });
 

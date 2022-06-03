@@ -3,15 +3,9 @@ import {View, Text,StyleSheet,Image,FlatList } from 'react-native';
 import { Colors } from './Common/Colors';
 import Detail from './Common/Detail';
 
-const TeamLineup = ({
-    route,
-    // index,
-    // lineup
-}) => {
-
-    const {index,lineup} = route.params;
+const TeamLineup = ({index,lineup}) => {
    
-     return (
+     return lineup.length>0 ? (
         <View style={styles.parent}>
             <Image
             style={styles.image}
@@ -66,7 +60,7 @@ const TeamLineup = ({
             
             
         </View>
-    );
+    ): <Text>No data</Text>;
 };
 
 
@@ -76,7 +70,8 @@ const styles = StyleSheet.create({
         borderColor:Colors.black,
         borderWidth:1,
         backgroundColor:Colors.white,
-        marginHorizontal:16
+        marginHorizontal:16,
+        marginBottom:24
 
     },
     image:{

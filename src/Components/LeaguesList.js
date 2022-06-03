@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         width:'100%',
         resizeMode: 'contain',
         flex:4,
-        backgroundColor: Colors.mybackground,
+        backgroundColor: Colors.white,
 
 
     },touchable:{
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         marginHorizontal:7,
         marginVertical: 8,
         padding:4,
-        backgroundColor: Colors.mybackground,
+        backgroundColor: Colors.white,
         borderColor: 'black',
         borderWidth:1,
         borderRadius:8
