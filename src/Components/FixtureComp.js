@@ -15,7 +15,7 @@ const FixtureComp = ({
                         matchdatetime,    
                     }) => {
 
-var Live = 'Live';
+var Live = leaguename;
 
      return (
         <TouchableOpacity
@@ -41,7 +41,7 @@ var Live = 'Live';
                         name={awayname}
                         />
                 </View>
-                    <Text style={styles.baseline}>{leaguename} on {matchdatetime}</Text>
+                    <Text style={styles.baseline}>Date: {matchdatetime}</Text>
                 </View>
         </TouchableOpacity>
     );
@@ -66,11 +66,12 @@ const styles = StyleSheet.create({
         marginTop:50,
     },
     text:{
-        fontSize:24,
+        fontSize:18,
         flex:1,
         alignSelf: 'center',
         color:Colors.black,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        textAlign:'center'
     },
     baseline:{
         color:Colors.black,

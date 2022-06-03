@@ -124,6 +124,20 @@ function InsideLeagues({route}){
           marginBottom:8
         }}}>
           <Tab.Screen 
+          name="LeagueFixtures" 
+          component={LeagueFixtures} 
+          initialParams={{id:id}}
+          options={{
+            headerShown: false,
+            tabBarIcon:({focused})=>(
+              <TabNavButton
+                focused={focused}
+                name='Fixtures'
+              />
+            )
+            }}/>
+
+          <Tab.Screen 
           name="TeamSearch" 
           component={TeamSearch} 
           initialParams={{id:id}}
@@ -148,18 +162,7 @@ function InsideLeagues({route}){
               />
             )
             }}/>
-          <Tab.Screen 
-          name="LeagueFixtures" 
-          component={LeagueFixtures} 
-          options={{
-            headerShown: false,
-            tabBarIcon:({focused})=>(
-              <TabNavButton
-                focused={focused}
-                name='Leagues'
-              />
-            )
-            }}/>
+          
       </Tab.Navigator>
       );
 }
