@@ -27,7 +27,6 @@ const Leagues = ({route,navigation}) => {
           
           axios.request(options).then(function (response) {
                 setleagues(response.data.response);
-                console.log(response.data.response);
           }).catch(function (error) {
                 console.error(error);
           });

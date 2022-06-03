@@ -7,10 +7,6 @@ import SearchBar from '../Components/Common/SearchBar';
 
 const TeamSearch = ({navigation,route}) => {
 
-    // useEffect(()=>{
-    //     apicall();
-    // },[teams]);
-
     const[ teams, setTeams ]= useState([]);
     const {id} = route.params;
     const [term,setTerm]= useState('');
@@ -28,7 +24,6 @@ const TeamSearch = ({navigation,route}) => {
           };
           
           axios.request(options).then(function (response) {
-              console.log('called');
               setTeams(response.data.response);
           }).catch(function (error) {
               console.error(error);

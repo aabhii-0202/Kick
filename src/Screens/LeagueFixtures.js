@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {View, Text,StyleSheet,FlatList,Image,TouchableOpacity } from 'react-native';
+import {View, Text,FlatList } from 'react-native';
 import FixtureComp from '../Components/FixtureComp';
 import axios from 'axios';
 import { Colors } from '../Components/Common/Colors';
@@ -26,7 +26,6 @@ const LeagueFixtures = ({ navigation,route}) => {
           };
           
           axios.request(options).then(function (response) {
-              console.log(response.data.response);
               setFixtures(response.data.response);
           }).catch(function (error) {
               console.error(error);
