@@ -2,13 +2,11 @@ import React from 'react';
 import {View, Text,StyleSheet,Image,FlatList } from 'react-native';
 import { Colors } from './Common/Colors';
 import Detail from './Common/Detail';
-import Heading from './Common/Heading';
 
 const TeamLineup = ({index,lineup}) => {
    
      return lineup.length>0 ? (
         <View style={styles.parent}>
-            <Heading text="Lineups" /> 
             <Image
             style={styles.image}
                 source={{uri:lineup[index].team.logo}}

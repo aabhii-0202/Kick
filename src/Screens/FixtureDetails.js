@@ -15,6 +15,7 @@ const FixtureDetails = ({route,navigation}) => {
     const [fixturedetail,setfixture] = useState();
     const [foucsed1,setfocused1] = useState(false);
     const [foucsed0,setfocused0] = useState(true);
+    const [index,setindex] = useState(0);
     
     const {id} = route.params;
     useEffect(()=>{
@@ -25,7 +26,7 @@ const FixtureDetails = ({route,navigation}) => {
         const options = {
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/fixtures',
-            params: {id: '157201'},
+            params: {id: id},
             headers: {
               'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
               'X-RapidAPI-Key': '7eccf3c916msh125eb404409a0fcp1de117jsn811515176179'
@@ -39,27 +40,28 @@ const FixtureDetails = ({route,navigation}) => {
           });
     }
 
-    const showdetails = (index) => {
+    const showdetails = () => {
         return fixturedetail.lineups.length>0 
             ?(
             <View>
+            <Heading text="Lineups" /> 
             <View style={styles.tabview}>
                 <NewButton
                     onPressed={()=>{
-                        console.log('Button 1 pressed');
                         setfocused1(false);
                         setfocused0(true);
+                        setindex(0);
                     }}
                     text={fixturedetail.teams.home.name}
                     focused={foucsed0}
                     />
                 <NewButton
                     onPressed={()=>{
-                        console.log('Button 2 pressed');
                         setfocused1(true);
                         setfocused0(false);
+                        setindex(1);
                     }}
-                    text={fixturedetail.teams.home.name}
+                    text={fixturedetail.teams.away.name}
                     focused={foucsed1}
                     />
                 
@@ -70,7 +72,7 @@ const FixtureDetails = ({route,navigation}) => {
             />
             </View>)
             :
-            <Text>Data not provided.</Text>
+            <Text style={styles.datanotprovided}>Lineup data is not available for now.</Text>
     }
 
     const renderPage = () => {
@@ -117,7 +119,7 @@ const FixtureDetails = ({route,navigation}) => {
                     );
                 }}
             />
-            {showdetails(0)}
+            {showdetails()}
 
 
         </ScrollView>
@@ -158,10 +160,16 @@ const styles = StyleSheet.create({
     },
     tabview:{
         flexDirection:'row',
-        padding :8,
-        marginHorizontal:4,
+        marginHorizontal:16,
         marginVertical:8,
         borderRadius:8,
+        borderWidth:1,
+    },
+    datanotprovided:{
+        fontSize:16,
+        color:Colors.black,
+        alignSelf:'center',
+        marginBottom:20
     }
 
 });

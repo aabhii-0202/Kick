@@ -13,8 +13,6 @@ const NewButton = ({ onPressed, text, focused }) => {
             borderRadius: 8,
             borderWidth: 1,
             borderColor: focused?Colors.white:Colors.tabnavNotFocused,
-            marginLeft: 5,
-            marginRight: 5,
         }}>
         <Text style={{
             alignSelf: 'center',
