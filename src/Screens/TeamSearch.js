@@ -5,10 +5,9 @@ import LeaguesList from '../Components/LeaguesList';
 import SearchBar from '../Components/Common/SearchBar';
 
 
-const TeamSearch = ({navigation,route}) => {
+const TeamSearch = ({navigation}) => {
 
     const[ teams, setTeams ]= useState([]);
-    const {id} = route.params;
     const [term,setTerm]= useState('');
     
 
@@ -30,17 +29,10 @@ const TeamSearch = ({navigation,route}) => {
           });
     }
 
-    return (
-        <View>
-            <SearchBar
-                placeholder='Search Your Favrouit Team'
-                term={term}
-                onTermChanged={(newTerm) => {
-                    setTerm(newTerm);
-                    searchApi(term);
-                }}
-            />
-            <FlatList
+    const renderList = () => {
+        teams.length>0
+        ?
+        <FlatList
                 data={teams}
                 keyExtractor={(teams)=>teams.team.id}
                 numColumns={3}
@@ -55,9 +47,22 @@ const TeamSearch = ({navigation,route}) => {
                         />
                     );
                 }} 
-
             />
-            
+            :
+            <Text>No Such Team</Text>
+    }
+
+    return (
+        <View>
+            <SearchBar
+                placeholder='Search Your Favrouit Team'
+                term={term}
+                onTermChanged={(newTerm) => {
+                    setTerm(newTerm);
+                    searchApi(term);
+                }}
+            />
+            {renderList()}
         </View>
     );
 };

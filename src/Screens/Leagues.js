@@ -35,7 +35,6 @@ const Leagues = ({route,navigation}) => {
         <View>
             <FlatList
                 data={leagues}
-                keyExtractor={(leagues,index)=>leagues.id+index}
                 numColumns={3}
                 renderItem={({item})=>{
                     return (

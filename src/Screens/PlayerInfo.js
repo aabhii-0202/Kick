@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {View, Text,StyleSheet,Image,ScrollView } from 'react-native';
-import axios from 'axios';
+import {View, Text,StyleSheet,Image,ScrollView,FlatList } from 'react-native';
 import {Colors} from '../Components/Common/Colors';
 import Detail from '../Components/Common/Detail';
 import Stats from '../Components/Stats';
@@ -8,79 +7,94 @@ import Heading from '../Components/Common/Heading';
 
 const PlayerInfo = ({route,navigation}) => {
 
-    const {id} = route.params;
-    const [playerinfo,setplayerinfo] = useState();
+    const {details} = route.params;
+    const [playerinfo,setplayerinfo] = useState({});
+    const [statistics,setStatistics] = useState([]);
 
     useEffect(()=>{
-        fetchdata
-    },[playerinfo]);
+        fetchdata();
+    },[0]);
 
 
-    const fetchdata =  () => {
-        const options = {
-            method: 'GET',
-            url: 'https://api-football-v1.p.rapidapi.com/v3/players',
-            params: {id: id, season: '2020'},
-            headers: {
-              'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
-              'X-RapidAPI-Key': '7eccf3c916msh125eb404409a0fcp1de117jsn811515176179'
-            }
-          };
-          
-          axios.request(options).then(function (response) {
-            setplayerinfo(response.data.response);
-            console.log(playerinfo);
-          }).catch(function (error) {
-              console.error(error);
-          });
+    const fetchdata = () => {
+        console.log('Details '+details);
+        setplayerinfo(details.player);
+        setStatistics(details.statistics);
     }
 
-    // console.log('lllll'+playerinfo);
-     return (
-         
-        <ScrollView style={styles.container}>
-            <Text>{id}</Text>
-            <Image
-                source={{uri:'https://media.api-sports.io/football/players/276.png'}}
+    const showstats = () => {
+        return statistics.length>0 ?
+            <View>
+            <Heading text='Stats'/>
+
+            <FlatList
+                data={statistics}
+                horizontal={true}
+                renderItem={({item})=>{
+                    return (
+                        <Stats
+                        stats={item}
+                        />
+                    );
+                }}
+            />
+
+            
+            </View>
+            : <Text style={styles.loading}>Loading Stats</Text>
+        
+    }
+
+    const showplayerdetails = () => {
+        console.log('playerinfo  '+playerinfo)
+        return playerinfo ? <View>
+             <Image
+                source={{uri:playerinfo.photo}}
                 style={styles.pic}
                 />
-            <Text style={styles.name}>Neymar</Text>
+            <Text style={styles.name}>{playerinfo.name}</Text>
             <View>
             <Detail
                 title='First Name'
-                value='Neymar'
+                value= {playerinfo.firstname}
             />
             <Detail
                 title='Last name'
-                value='da Silva Santos Júnior'
+                value={playerinfo.lastname}
             />
             <Detail
                 title='Age'
-                value='29'
-            />
-            <Detail
-                title='Birth date'
-                value='1992-02-05'
-            />
-            <Detail
-                title='Birth Place'
-                value='Mogi das Cruzes,Brazil'
+                value={playerinfo.age}
             />
             <Detail
                 title='Nationality'
-                value='Brazil'
+                value= {playerinfo.nationality}
             />
             <Detail
                 title='Height'
-                value='175 cm'
+                value={playerinfo.height}
             />
             <Detail
                 title='Weight'
-                value='68 kg'
+                value={playerinfo.weight}
             />
             </View>
-            <Heading text='Stats'/>
-            <Stats/>
+
+
+
+        </View>
+        : <Text style= {styles.loading}>Loading Info</Text>
+
+
+    }
+
+    return (
+         
+        
+        <ScrollView style={styles.container}>
+            {showplayerdetails()}
+            {showstats()}
+            
             
         </ScrollView>
     );
@@ -103,6 +117,14 @@ const styles = StyleSheet.create({
     },
     container:{
         marginHorizontal:16
+    },
+    loading:{
+        color:Colors.black,
+        fontSize:24,
+        alignSelf:'center',
+        marginHorizontal:24,
+        marginVertical:140,
+        fontWeight:'bold'
     }
 });
 
