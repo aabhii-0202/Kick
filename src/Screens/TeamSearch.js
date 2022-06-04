@@ -2,7 +2,8 @@ import React, {useEffect,useState} from 'react';
 import {View, Text,StyleSheet,FlatList } from 'react-native';
 import axios from 'axios';
 import LeaguesList from '../Components/LeaguesList';
-import SearchBar from '../Components/Common/SearchBar';
+import SearchWithSumbit from '../Components/Common/SearchWithSumbit';
+import { Colors } from '../Components/Common/Colors';
 
 
 const TeamSearch = ({navigation}) => {
@@ -30,7 +31,7 @@ const TeamSearch = ({navigation}) => {
     }
 
     const renderList = () => {
-        teams.length>0
+        return teams.length>0
         ?
         <FlatList
                 data={teams}
@@ -49,17 +50,28 @@ const TeamSearch = ({navigation}) => {
                 }} 
             />
             :
-            <Text>No Such Team</Text>
+            <Text style={{
+                color: Colors.black,
+                textAlign:'center',
+                alignSelf: 'center',
+                fontWeight: 'bold',
+                margin:100,
+                fontSize:32
+            }}>No Such Team</Text>
     }
 
     return (
         <View>
-            <SearchBar
+            <SearchWithSumbit
                 placeholder='Search Your Favrouit Team'
                 term={term}
+                submit = {() => {
+                    if(term.length>2)
+                    searchApi(term);
+                }}
                 onTermChanged={(newTerm) => {
                     setTerm(newTerm);
-                    searchApi(term);
+                    
                 }}
             />
             {renderList()}

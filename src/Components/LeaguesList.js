@@ -1,6 +1,5 @@
 import React from 'react';
 import { Image,View,Text ,StyleSheet,TouchableOpacity } from 'react-native';
-import { SvgCssUri } from 'react-native-svg';
 import {Colors} from '../Components/Common/Colors';
 
 
