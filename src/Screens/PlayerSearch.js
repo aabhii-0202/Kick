@@ -16,7 +16,7 @@ const PlayerSearch = ({route,navigation}) => {
         const options = {
             method: 'GET',
             url: 'https://api-football-v1.p.rapidapi.com/v3/players',
-            params: {league: '61', search: 'neymar'},
+            params: {league: id, search: name},
             headers: {
               'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com',
               'X-RapidAPI-Key': '7eccf3c916msh125eb404409a0fcp1de117jsn811515176179'
@@ -26,7 +26,6 @@ const PlayerSearch = ({route,navigation}) => {
           axios.request(options).then(function (response) {
               console.log(response.data);
               if(response.data.response.length===0){
-                  
                   setError(true);
               }
               else{
@@ -54,7 +53,7 @@ const PlayerSearch = ({route,navigation}) => {
         renderItem={({item})=>{
             return (
                 <LeaguesList
-                    onclick={()=>navigation.navigate('PlayerInfo',{id:item.player.id})}
+                    onclick={()=>navigation.navigate('PlayerInfo',{details:item})}
                     logo = {item.player.photo}
                     name = {item.player.name}
                 />
@@ -67,7 +66,7 @@ const PlayerSearch = ({route,navigation}) => {
      return (
         <View>
             <SearchBar
-                placeholder='Search Your Favrouit Team'
+                placeholder='Search Your Favrouit Player in the league.'
                 term={term}
                 onTermChanged={(newTerm) => {
                     setTerm(newTerm);

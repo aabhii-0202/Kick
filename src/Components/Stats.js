@@ -6,73 +6,76 @@ import Detail from './Common/Detail';
 
 const Stats = ({stats}) => {
 
+    console.log(stats+"  length");
 
      return (
+         stats?
         <View style={styles.parent}>
             <Image
-                source={{uri:'https://media.api-sports.io/football/leagues/61.png'}}
+                source={{uri:stats.league.logo}}
                 style={styles.pic}
             />
-            <Text style={styles.text}>League 1</Text>
+            <Text style={styles.text}>{stats.league.name}</Text>
             <View style={styles.container}>
             <Detail
                 title='Season'
-                value='2020'
+                value= {stats.league.season}
             />
             <Detail
                 title='Country'
-                value='France'
+                value= {stats.league.country}
             />
             <Detail
                 title='Appearance'
-                value='13'
+                value={stats.games.appearences}
             />
             <Detail
                 title='Position'
-                value='Attacker'
+                value={stats.games.position}
             />
             <Detail
                 title='Rating'
-                value='7.307692'
+                value={stats.games.rating}
             />
             <Detail
                 title='Goals'
-                value='6'
+                value={stats.goals.total}
             />
             <Detail
                 title='Assist'
-                value='3'
+                value={stats.goals.assists}
             />
             <Detail
                 title='Conceded'
-                value='0'
+                value={stats.goals.conceded}
             />
             <Detail
                 title='Yellow Card'
-                value='5'
+                value={stats.cards.yellow}
             />
             <Detail
                 title='Yellow Red'
-                value='1'
+                value={stats.cards.yellowred}
             />
             <Detail
                 title='Red'
-                value='1'
+                value={stats.cards.red}
             />
             <Detail
                 title='Penality Scored'
-                value='3'
+                value={stats.penalty.scored}
             />
             <Detail
                 title='Penality Missed'
-                value='0'
+                value={stats.penalty.missed}
             />
             <Detail
                 title='Penality Saved'
-                value='0'
+                value={stats.penalty.saved}
             />
             </View>
         </View>
+        :<Text>No stats</Text>
     );
 };
 
@@ -97,7 +100,9 @@ const styles = StyleSheet.create({
         color:Colors.black,
         fontSize:20,
         alignSelf:'center',
-        marginVertical:8
+        marginVertical:16,
+        marginHorizontal:16,
+        fontWeight:'bold'
     },container:{
         marginHorizontal:16
     }

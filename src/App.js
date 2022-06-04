@@ -111,7 +111,6 @@ function HomeScreen(){
             <Tab.Screen 
           name="TeamSearch" 
           component={TeamSearch} 
-          initialParams={{id:id}}
           options={{
             headerShown: false,
             tabBarIcon:({focused})=>(
