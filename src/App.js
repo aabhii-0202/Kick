@@ -14,7 +14,7 @@ import LeagueFixtures from './Screens/LeagueFixtures';
 import TeamInfo from './Screens/TeamInfo';
 import FixtureDetails from './Screens/FixtureDetails';
 import PlayerInfo from './Screens/PlayerInfo';
-
+import TeamInformationInLeague from './Screens/TeamInformationInLeague';
 const App = () => {
   const Stack = createNativeStackNavigator();
    return (
@@ -59,6 +59,11 @@ const App = () => {
             <Stack.Screen
             name="PlayerInfo"
             component={PlayerInfo}
+            options={{headerShown: false}}
+            />
+            <Stack.Screen
+            name="TeamInformationInLeague"
+            component={TeamInformationInLeague}
             options={{headerShown: false}}
             />
       </Stack.Navigator>

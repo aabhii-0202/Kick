@@ -41,7 +41,9 @@ const TeamSearch = ({navigation}) => {
                     return (
                         <LeaguesList
                             onclick = {()=>navigation.navigate('TeamInfo',{
-                                id:item.team.id
+                                id:item.team.id,
+                                name: item.team.name,
+                                logo: item.team.logo
                             })}
                             logo = {item.team.logo}
                             name = {item.team.name}
