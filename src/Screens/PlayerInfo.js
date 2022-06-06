@@ -13,11 +13,10 @@ const PlayerInfo = ({route,navigation}) => {
 
     useEffect(()=>{
         fetchdata();
-    },[0]);
+    },[]);
 
 
     const fetchdata = () => {
-        console.log('Details '+details);
         setplayerinfo(details.player);
         setStatistics(details.statistics);
     }
@@ -46,7 +45,6 @@ const PlayerInfo = ({route,navigation}) => {
     }
 
     const showplayerdetails = () => {
-        console.log('playerinfo  '+playerinfo)
         return playerinfo ? <View>
              <Image
                 source={{uri:playerinfo.photo}}

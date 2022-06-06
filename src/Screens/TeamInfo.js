@@ -54,7 +54,13 @@ const TeamInfo = ({route,navigation}) => {
 
             />
         </View>
-        : <Text>Unable to fetch</Text>
+        : <Text style = {{
+            color: Colors.black,
+            fontSize:24,
+            alignSelf: 'center',
+            fontWeight: '100',
+            margin:32
+        }}>Fetching Data</Text>
     }
 
     return (
@@ -66,7 +72,7 @@ const TeamInfo = ({route,navigation}) => {
                     width: '100%'
                 }}
                 />
-            <Text style={styles.name}>{id} {name}</Text>
+            <Text style={styles.name}>{name}</Text>
             {renderList()}
         </ScrollView>
     );
